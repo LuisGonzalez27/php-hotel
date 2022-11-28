@@ -37,6 +37,19 @@ $hotels = [
     ],
 ];
 
+if (isset($_GET['parking']) && !empty($_GET['parking'])) {
+    // var_dump($_GET);
+    $filterHotels = [];
+    foreach ($hotels as $item) {
+        if ($item['parking'] && $_GET['parking'] == 'parking') {
+            $filterHotels[] = $item;
+        } else if (!$item['parking'] && $_GET['parking'] == 'noParking') {
+            $filterHotels[] = $item;
+        }
+    }
+    $hotels = $filterHotels;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -59,6 +72,19 @@ $hotels = [
     <div class="container">
         <h1 class="text-center py-5">HOTELS</h1>
 
+        <form action="index.php" method="GET" name="formHotel" class="row g-3 d-flex justify-content-center py-3">
+            <div class="col-auto">
+                <select name="parking" id="parking" class="form-select">
+                    <option selected>Select</option>
+                    <option value="parking">Parking</option>
+                    <option value="noParking">No parking</option>
+                </select>
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+
         <table class="table table-info table-hover">
             <thead>
                 <tr class="text-center text-uppercase">
@@ -70,26 +96,26 @@ $hotels = [
                 </tr>
             </thead>
 
-            <?php foreach ($hotels as $hotel) {
-                $parcheggio = $hotel['parking'] ? 'Yes' : 'No';
+            <?php foreach ($hotels as $item) {
+                $parcheggio = $item['parking'] ? 'Yes' : 'No';
             ?>
 
             <tbody class="text-center table-group-divider">
                 <tr>
                     <td>
-                        <?php echo $hotel['name'] ?>
+                        <?php echo $item['name'] ?>
                     </td>
                     <td>
-                        <?php echo $hotel['description'] ?>
+                        <?php echo $item['description'] ?>
                     </td>
                     <td class=" text-uppercase ">
                         <?php echo $parcheggio ?>
                     </td>
                     <td>
-                        <?php echo $hotel['vote'] ?>
+                        <?php echo $item['vote'] ?>
                     </td>
                     <td>
-                        <?php echo $hotel['distance_to_center'] ?> Km
+                        <?php echo $item['distance_to_center'] ?> Km
                     </td>
                 </tr>
             </tbody>

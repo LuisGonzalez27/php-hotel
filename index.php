@@ -45,9 +45,16 @@ if (isset($_GET['parking']) && !empty($_GET['parking'])) {
             $filterHotels[] = $item;
         } else if (!$item['parking'] && $_GET['parking'] == 'noParking') {
             $filterHotels[] = $item;
+        } else if ($_GET['parking'] == 'select') {
+            $filterHotels[] = $item;
         }
+        $hotels = $filterHotels;
     }
-    $hotels = $filterHotels;
+
+}
+// if fatto in un altro modo
+if (isset($_GET['vote']) && !empty($_GET['vote'])) {
+    $hotels = array_filter($hotels, fn($value) => $value['vote'] >= $_GET['vote']);
 }
 
 ?>
@@ -75,9 +82,19 @@ if (isset($_GET['parking']) && !empty($_GET['parking'])) {
         <form action="index.php" method="GET" name="formHotel" class="row g-3 d-flex justify-content-center py-3">
             <div class="col-auto">
                 <select name="parking" id="parking" class="form-select">
-                    <option selected>Select</option>
+                    <option value="select">Select</option>
                     <option value="parking">Parking</option>
                     <option value="noParking">No parking</option>
+                </select>
+            </div>
+            <div class="col-auto">
+                <select name="vote" class="form-select">
+                    <option value="" selected>Value</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
                 </select>
             </div>
             <div class="col-auto">

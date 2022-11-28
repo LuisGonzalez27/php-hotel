@@ -56,7 +56,48 @@ $hotels = [
 </head>
 
 <body>
+    <div class="container">
+        <h1 class="text-center py-5">HOTELS</h1>
 
+        <table class="table table-info table-hover">
+            <thead>
+                <tr class="text-center text-uppercase">
+                    <th scope="col">name</th>
+                    <th scope="col">description</th>
+                    <th scope="col">parking</th>
+                    <th scope="col">vote</th>
+                    <th scope="col">distance from center</th>
+                </tr>
+            </thead>
+
+            <?php foreach ($hotels as $hotel) {
+            ?>
+
+            <tbody class="text-center table-group-divider">
+                <tr>
+                    <td>
+                        <?php echo $hotel['name'] ?>
+                    </td>
+                    <td>
+                        <?php echo $hotel['description'] ?>
+                    </td>
+                    <td class=" text-uppercase ">
+                        <!-- <?php echo $parking ?> -->
+                        DA DISTEMARE
+                    </td>
+                    <td>
+                        <?php echo $hotel['vote'] ?>
+                    </td>
+                    <td>
+                        <?php echo $hotel['distance_to_center'] ?> Km
+                    </td>
+                </tr>
+            </tbody>
+
+            <?php }
+            ?>
+        </table>
+    </div>
 
 </body>
 

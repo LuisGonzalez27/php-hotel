@@ -71,6 +71,7 @@ $hotels = [
             </thead>
 
             <?php foreach ($hotels as $hotel) {
+                $parcheggio = $hotel['parking'] ? 'Yes' : 'No';
             ?>
 
             <tbody class="text-center table-group-divider">
@@ -82,8 +83,7 @@ $hotels = [
                         <?php echo $hotel['description'] ?>
                     </td>
                     <td class=" text-uppercase ">
-                        <!-- <?php echo $parking ?> -->
-                        DA DISTEMARE
+                        <?php echo $parcheggio ?>
                     </td>
                     <td>
                         <?php echo $hotel['vote'] ?>
